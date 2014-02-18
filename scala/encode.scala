@@ -7,13 +7,12 @@ object encode {
 
 		//main 
 		println(encode(Estr, 8));
-		//println(decode(Dstr, 8));
+		println(decode(Dstr, 8));
 		//solve(Sstr, 26);
-
 	}
 
 	def addCharInt(charInt : Int, moveAmt : Int) : Int = {
-		if(charInt < 64) 
+		if(charInt <= 64) 
 			return charInt;
 		else if((charInt + moveAmt) > 90)
 		    return (64 + ((charInt + moveAmt) - 90));
@@ -22,7 +21,7 @@ object encode {
 	}
 
 	def subCharInt(charInt : Int, moveAmt : Int) : Int = {
-		if(charInt < 64)
+		if(charInt <= 64)
 		    return charInt;
 		else if((charInt - moveAmt) < 64)
 			return (90 - (64 - (charInt - moveAmt)));
@@ -32,22 +31,32 @@ object encode {
 
 	def encode(str : String, moveAmt : Int) : String = {
 		val char : Char = str.charAt(0);
-		val rest : String = str.charAt(1, str.size);
+		val rest : String = str.substring(1, str.size);
 		val charInt : Int = addCharInt(char.toInt, moveAmt);
 		val newChar : Char = charInt.toChar;
 
 		if(rest.size == 0){
-			return newChar;
+			return newChar.toString;
 		}
 		else{
-			newChar + encode(rest, moveAmt);  
+			newChar.toString + encode(rest, moveAmt);  
 		}
 	}
 
 
-	/*def decode(str : String, moveAmt : Int) : String = {
+	def decode(str : String, moveAmt : Int) : String = {
+		val char : Char = str.charAt(0);
+		val rest : String = str.substring(1, str.size);
+		val charInt : Int = subCharInt(char.toInt, moveAmt);
+		val newChar : Char = charInt.toChar;
 
-	}*/
+		if(rest.size == 0){
+			return newChar.toString;
+		}
+		else{
+			newChar.toString + decode(rest, moveAmt);  
+		}
+	}
 
 
 	/*def solve(str : String, solves : Int) : String = {
