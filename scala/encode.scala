@@ -8,7 +8,7 @@ object encode {
 		//main 
 		println(encode(Estr, 8));
 		println(decode(Dstr, 8));
-		//solve(Sstr, 26);
+		println(solve(Sstr, 26));
 	}
 
 	def addCharInt(charInt : Int, moveAmt : Int) : Int = {
@@ -59,7 +59,10 @@ object encode {
 	}
 
 
-	/*def solve(str : String, solves : Int) : String = {
-
-	}*/
+	def solve(str : String, solves : Int) : String = {
+		if (solves == -1) 
+			return "\n";
+    	else 
+    		"Ceaser " + solves.toString() + ": " + encode(str, solves) + " \n" + solve(str, solves - 1);
+	}
 }
