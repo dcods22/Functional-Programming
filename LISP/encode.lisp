@@ -1,0 +1,45 @@
+(defun addInt (charInt moveAmt)
+  (if(< charInt 64)
+		(let (newCharInt charInt))
+	)
+	(if(< charInt (+ charInt 64)) 
+		(let (newCharInt (+ 64 (- (+ charInt moveAmt) 90))))
+	)
+	(let (newCharInt (+ charInt moveAmt)))
+	newCharInt
+)
+
+(defun subInt (charInt moveAmt)
+	(if(< charInt 64)
+		(let (newCharInt charInt))
+	)
+	(if(< charInt (- charInt 64)) 
+		(let (newCharInt (- 90 (- 64 (- charInt moveAmt)))))
+	)
+	(let (newCharInt (+ charInt moveAmt)))
+	newCharInt
+)
+
+(defun encode (str moveAmt)
+	(let ((getChar (first str))))
+	(let ((newStr (rest str))))
+	(let ((charInt addInt (char-code getChar) moveAmt )))
+	(let ((newChar (code-char charInt) )))
+	(if(length newStr(== 0))
+		(concatenate newChar encode(newStr moveAmt))
+	)	 
+	newChar
+)
+
+(defun decode (str moveAmt)
+	(let ((getChar (first str))))
+	(let ((newStr (rest str))))
+	(let ((charInt SUBInt (char-code getChar) moveAmt )))
+	(let ((newChar (code-char charInt) )))
+	(if(length newStr(== 0))
+		(concatenate newChar decode(newStr moveAmt))
+	)	 
+	newChar
+)
+
+(encode "hal" 1)
