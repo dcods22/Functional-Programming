@@ -22,24 +22,24 @@ subInt(CharInt,MoveAmt) ->
   end.
 
 encode(Str1,MoveAmt) ->
-  NewChar = hd(Str1);
-  CharInt = addInt(NewChar, MoveAmt);
-  NewStr = tl(Str1);
+  TheChar = hd(Str1),
+  CharInt = addInt(TheChar, MoveAmt),
+  NewStr = tl(Str1),
   if 
-        len(Str1) == 0 ->
-          NewChar;
+        length(Str1) == 0 ->
+          CharInt;
         true ->        
-          NewChar + encode(NewStr, MoveAmt)
+          CharInt + encode(NewStr, MoveAmt)
     end.
 
 decode(Str1,MoveAmt) ->
-  NewChar = hd(Str1);
-  CharInt = subInt(NewChar, MoveAmt);
-  NewStr = tl(Str1);
+  TheChar = hd(Str1),
+  CharInt = subInt(TheChar, MoveAmt),
+  NewStr = tl(Str1),
   if 
-        len(Str1) == 0 ->
-          NewChar;
+        length(Str1) == 0 ->
+          CharInt;
         true ->        
-          NewChar + decode(NewStr, MoveAmt)
+          CharInt + decode(NewStr, MoveAmt)
     end.
 
