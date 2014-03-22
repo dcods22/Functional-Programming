@@ -1,0 +1,34 @@
+import System.Environment
+import Data.Char
+import Data.List
+
+addInt charInt moveAmt = 
+    if(charInt < 64) then 
+        charInt
+      	else if((charInt + moveAmt) > 90) then
+   			64 + ((charInt + moveAmt) - 90)
+  			else
+    			charInt + moveAmt
+
+subInt charInt moveAmt = 
+	if(charInt < 64) then
+	    charInt
+	  	else if((charInt - moveAmt) < 65) then
+	   		90 - (64 - (charInt - moveAmt))
+	  		else
+	    		charInt - moveAmt
+ 
+encode str1 moveAmt = 
+ 	let 
+ 		theChar = head(str1)
+ 		newStr = tail(str1)
+ 		theCharInt = ord(theChar)
+ 		charInt = addInt theCharInt moveAmt
+ 		newChar = chr(charInt)
+ 	in
+ 		if(length newStr == 0) then
+ 		    newChar
+ 			else
+ 		        newChar :: encode newStr moveAmt
+
+main = print (subInt 65 1)

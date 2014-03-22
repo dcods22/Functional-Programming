@@ -1,5 +1,5 @@
 -module(encode).
--export([addInt/2,subInt/2,encode/2,decode/2]).
+-export([addInt/2,subInt/2,encode/2,decode/2, start/0]).
 
 addInt(CharInt,MoveAmt) ->
     if
@@ -43,3 +43,5 @@ decode(Str1,MoveAmt) ->
           CharInt + decode(NewStr, MoveAmt)
     end.
 
+start() ->
+    io:fwrite("Test").
