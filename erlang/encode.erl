@@ -18,7 +18,7 @@ subInt(CharInt,MoveAmt) ->
       (CharInt - MoveAmt) < 64 ->
       (90 - (64 - (CharInt - MoveAmt)));
       true ->
-        (CharInt + MoveAmt)
+        (CharInt - MoveAmt)
   end.
 
 encode(Str1,MoveAmt) ->
