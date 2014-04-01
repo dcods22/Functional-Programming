@@ -23,7 +23,8 @@ subInt(CharInt,MoveAmt) ->
 
 encode(Str1,MoveAmt) ->
   	TheChar = string:substr(Str1,1,1),
-  	CharInt = addInt(TheChar, MoveAmt),
+  	TheCharInt = hd(TheChar),
+  	CharInt = addInt(TheCharInt, MoveAmt),
   	NewStr = string:substr(Str1,2),
   	if 
 	  length(Str1) == 0 ->
