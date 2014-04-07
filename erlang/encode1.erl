@@ -1,5 +1,6 @@
 -module(encode1).
--export([addInt/2, subInt/2,start/0]).
+-export([addInt/2, subInt/2, encode/2, decode/2, solve/2]).
+-import(string, [to_upper/1, concat/2]).
 
 addInt(CharInt,MoveAmt) ->
     if
@@ -21,18 +22,34 @@ subInt(CharInt,MoveAmt) ->
         (CharInt - MoveAmt)
  	end.
 
-encode(Str1,MoveAmt) ->
-  	TheChar = string:substr(Str1,1,1),
-  	TheCharInt = hd(TheChar),
+encode("", MoveAmt) -> "";
+encode(Str1, MoveAmt) ->
+  	TheCharInt = hd(Str1),
   	CharInt = addInt(TheCharInt, MoveAmt),
-  	NewStr = string:substr(Str1,2),
+  	NewStr = tl(Str1),
   	if 
-	  length(Str1) == 0 ->
-      	CharInt;
+	  length(NewStr) == 0 ->
+      	[CharInt];
       true ->        
-       	CharInt + encode(NewStr, MoveAmt)
+       	string:concat([CharInt], encode(NewStr, MoveAmt))
 	end.
 
-start() ->
-    io:write(encode("HAL",1)),
-    io:fwrite("\n").
+decode("", MoveAmt) -> "";
+decode(Str1, MoveAmt) ->
+    TheCharInt = hd(Str1),
+    CharInt = subInt(TheCharInt, MoveAmt),
+    NewStr = tl(Str1),
+    if 
+    length(NewStr) == 0 ->
+        [CharInt];
+      true ->        
+        string:concat([CharInt], decode(NewStr, MoveAmt))
+  end.
+
+solve(Str1, 0) -> io:fwrite(encode(Str1, 0));
+solve(Str1, Solves) ->
+    io:fwrite(encode(Str1, Solves)),
+    io:fwrite("\n"),
+    solve(Str1, (Solves -1)).
+
+    
